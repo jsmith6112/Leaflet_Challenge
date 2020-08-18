@@ -1,0 +1,41 @@
+1.	Briefly explain the logic for generating the base map.
+	Answer
+	We're evaluating Earthquake data from the US Geological Survey with data from across the globe. A world map is what we started with because the data we plan to populate is global in nature.
+	The center of the map was set at a Lattitute of 40.7, Longitude of -94.5 which is 
+
+2.	Describe how the JSON was loaded and how was the data traversed. Explain how was the information from the JSON used to render data on the map.
+	Answer
+	An AJAX call is made to acess the earthquake geoJSON data from the USGS.
+	For each quake in the listing, we pull the magnitude by traversing through the following path (feature.properties.mag)
+	There are two functions that use this information. Their names are styleInfo., getColor and getRadius
+
+3.	Explain the logic for generating the circles and amending the size of them. What does this communicate?
+	Answer
+	The script usese the magnitude to determine the radius of each circle. If the magnitude is equal to and of the same type as the number 0, nothing happens.
+	For every results greater than 0, the readius of each circle is calculated as the magnitude * 4. I think this multiplier is used to make each marker visibile on the map.
+
+4.	Describe how the layer for the Tectonic plates was generated.
+	Answer
+	Two variables are created to show the tectonic plates and the earthquakes.
+	A call is made to AJAX to pull the coordinates for the plates. The data is formatted in GeoJson. We feed the data into a function and plot it as an orange line showing the location of the tectonic plates.
+
+	 
+5.	What are the components in the layer control? How were they generated? 
+	Answer
+	The components are the basemaps and overlays.
+
+	The variable basemaps contains 3 map choices - satellites, grayscale and outdoors. These are map templates that were pulled from Mapbox
+
+
+6.	Explain the difference between the base map (tile layer) and the data layer(s).
+	Answer
+	Base Maps are template where a redering of the map is located. The Base maps are constant. They do not change.
+	The tile layers are generated based on data that changes. We see visualizations based on this data that is shown on top of the map.
+	The combined view of the Base Map + Tile layer shows the location of earthquakes with the option of seeing the tectonic plates on a map of the globe.
+
+7.	Walk through the logic of how the legend was generated and rendered on the page.
+	Answer
+	A variable called legend is created and placed in the bottom right postion on the map.
+	A div or place for the legend was created in the logic and added details using "info legend". A control function is called in the css to loop through intervals and generate a label with a colored square for each interval. 
+	Then grades and color vars are created. From there we loop through the intervals and generate a label with a colored square for each interval by pulling in the grades and color vars.
+	
